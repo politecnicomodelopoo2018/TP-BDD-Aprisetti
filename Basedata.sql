@@ -276,3 +276,5 @@ INSERT INTO `TPPYTHON`.`Peliculas_has_Actores` (`idPelicula`, `idActor`) VALUES 
 
 COMMIT;
 
+SELECT * FROM Actores;
+
