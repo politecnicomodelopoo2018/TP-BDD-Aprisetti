@@ -25,11 +25,22 @@ class Database(object):
                              user = self.__user,
                              passwd = self.__passwd,
                              db = self.__db)
-        select_cursor = db.cursor(pymysql.cursors.DictCursor)
+        return db
+
+    ''' select_cursor = db.cursor(pymysql.cursors.DictCursor)
 
         resul = select_cursor.execute("Select * From Peliculas")
         for item in select_cursor:
             print("%d / %s / %s / %s / %s / %s / %s / %s / %s / %s"
                   %(item["idPelicula"], item["titulo"], item["duracion"], item["fechaLanzamiento"],
                     item["presupuesto"], item["ganancia"], item["sinopsis"], item["idAutor"],
-                    item["idProductor"], item["idCategoria"]))
+                    item["idProductor"], item["idCategoria"]))'''
+            
+        
+
+    def createDict(self, tabla):
+
+        select = self.run().cursor(pymysql.cursors.DictCursor)
+
+        return select.execute("Select * From %s" % tabla)
+
