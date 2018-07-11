@@ -10,8 +10,12 @@ class Categoria(object):
     def cargar(self):
 
         self.__db.createDict()
-            self.__idCategoria = info["idCategoria"]
-            self.__nombre = info["nombre"]
+
+        self.__idCategoria = info["idCategoria"]
+        self.__nombre = info["nombre"]
+
+
+
 
     def setNombre(self, newNombre):
 

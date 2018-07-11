@@ -1,7 +1,6 @@
 import pymysql.cursors
 
 class Database(object):
-
     __instance = None
     __host = None
     __user = None
