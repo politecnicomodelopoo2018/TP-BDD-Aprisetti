@@ -19,27 +19,36 @@ class Database(object):
         self.__db = db
 
 
-    def run(self):
+    def run(self, query):
         db = pymysql.connect(host = self.__host,
                              user = self.__user,
                              passwd = self.__passwd,
-                             db = self.__db)
-        return db
+                             db = self.__db,
+                             autocommit = True
+                            )
 
-    ''' select_cursor = db.cursor(pymysql.cursors.DictCursor)
 
-        resul = select_cursor.execute("Select * From Peliculas")
+        '''select_cursor = db.cursor(pymysql.cursors.DictCursor)
+
+        select_cursor.execute("Select * From Peliculas")
         for item in select_cursor:
             print("%d / %s / %s / %s / %s / %s / %s / %s / %s / %s"
                   %(item["idPelicula"], item["titulo"], item["duracion"], item["fechaLanzamiento"],
                     item["presupuesto"], item["ganancia"], item["sinopsis"], item["idAutor"],
                     item["idProductor"], item["idCategoria"]))'''
+        cursor = db.cursor(pymysql.cursors.DictCursor) #CURSOR:SIRVE PARA EJECUTAR LOS QUERIES, DictCursor:Cursor a Dict
+
+        cursor.execute(query)
+
+        db.close()
+
+        return cursor
             
         
 
-    def createDict(self, tabla):
+    def createDict(self):
 
         select = self.run().cursor(pymysql.cursors.DictCursor)
 
-        return select.execute("Select * From %s" % tabla)
+        return select
 

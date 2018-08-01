@@ -1,4 +1,3 @@
-import pymysql.cursors
 from Database import *
 
 class Categoria(object):
@@ -7,21 +6,29 @@ class Categoria(object):
     __nombre = None
     __db = Database()
 
-    def cargar(self):
 
-        self.__db.createDict()
+    def cargar(self, id):
 
-        self.__idCategoria = info["idCategoria"]
-        self.__nombre = info["nombre"]
+        info = self.__db.run("Select * FROM Categorias")
 
 
+        for item in info:
+            if id == item["idCategoria"]:
+                self.__idCategoria = item["idCategoria"]
+                self.__nombre = item["nombre"]
 
 
-    def setNombre(self, newNombre):
+    def alta(self):
 
-        auxCursor = self.__db.run()
-        update = auxCursor.cursor(pymysql.cursors.DictCursor)
-        update.execute("UPDATE Categorias SET Nombre = %s WHERE idCategoria = %s" %(newNombre, self.__idCategoria))
+        self.__db.run("INSERT INTO Categorias Values (NULL, '%s')" %self.__nombre)
+
+    def baja(self):
+
+        self.__db.run("DELETE FROM Categorias WHERE idCategoria = '%s'" %(self.__idCategoria))
+
+
+    def modificacion(self, newNombre):
+
+        self.__db.run(("UPDATE Categorias SET nombre = '%s' WHERE idCategoria = '%s'" %(newNombre, self.__idCategoria)))
 
         self.__nombre = newNombre
-
