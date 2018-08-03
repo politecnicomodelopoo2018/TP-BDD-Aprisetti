@@ -1,4 +1,5 @@
 from Database import *
+from Class_Reviews import Reviews
 
 class Pelicula(object):
 
@@ -42,12 +43,22 @@ class Pelicula(object):
 
     def baja(self):
 
-        self.__db.run("DELETE FROM Pelicula WHERE idPelicula = '%s'" % (self.idPelicula))
+        idRev = self.__db.run("Select idReview From Reviews where idPelicula = '%s'" %(self.idPelicula))
+
+        reviewAux = Reviews()
+
+        for item in idRev:
+
+            print(item["idReview"])
+            reviewAux.cargar(item["idReview"])
+            reviewAux.baja()
+
+        self.__db.run("DELETE FROM Peliculas WHERE idPelicula = '%s'" % (self.idPelicula))
 
     def modificacion(self):
 
         self.__db.run(("UPDATE Peliculas SET titulo = '%s', duracion = '%s', fechaLanzamiento = '%s',"
-                       "presupuesto = '%s', ganancia = '%s', sinopsis = '%s'"
+                       "presupuesto = '%s', ganancia = '%s', sinopsis = '%s',"
                        "idAutor = '%s', idProductor = '%s', idCategoria = '%s'"
                        "WHERE idPelicula = %s" % (self.titulo, self.duracion, self.fechaLanzamiento,
                                                      self.presupuesto, self.ganancia, self.sinopsis,
