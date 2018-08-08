@@ -164,11 +164,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `TPPYTHON`;
-INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (1, 'Robert', 'Guédiguian', '1953-11-13', NULL);
-INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Alex', 'Garland', '1970-05-26', NULL);
-INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Alfred', 'Hitchcock', '1899-08-13', NULL);
-INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Francis Ford', 'Coppola', '1939-03-07', NULL);
-INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'George', 'Lucas', '1944-05-14', NULL);
+INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (1, 'Robert', 'Guédiguian', '1953-11-13', 1);
+INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Alex', 'Garland', '1970-05-26', 2);
+INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Alfred', 'Hitchcock', '1899-08-13', 3);
+INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'Francis Ford', 'Coppola', '1939-03-07', 20);
+INSERT INTO `TPPYTHON`.`Autores` (`idAutor`, `nombre`, `apellido`, `fechaNac`, `ratingPromedio`) VALUES (DEFAULT, 'George', 'Lucas', '1944-05-14', 30);
 
 COMMIT;
 
@@ -219,7 +219,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `TPPYTHON`;
-INSERT INTO `TPPYTHON`.`Actores` (`idActor`, `nombre`, `apellido`, `fechaNac`, `cantidadDePeliculas`) VALUES (DEFAULT, 'Jean', 'Du\'poc', '1977-05-07', 1);
+INSERT INTO `TPPYTHON`.`Actores` (`idActor`, `nombre`, `apellido`, `fechaNac`, `cantidadDePeliculas`) VALUES (DEFAULT, 'Jean', 'Dupoc', '1977-05-07', 1);
 INSERT INTO `TPPYTHON`.`Actores` (`idActor`, `nombre`, `apellido`, `fechaNac`, `cantidadDePeliculas`) VALUES (DEFAULT, 'Joseph', 'Stalin', '1898-06-13', 1939);
 INSERT INTO `TPPYTHON`.`Actores` (`idActor`, `nombre`, `apellido`, `fechaNac`, `cantidadDePeliculas`) VALUES (DEFAULT, 'Alfredito', 'Fuentes', '1950-07-12', 3);
 INSERT INTO `TPPYTHON`.`Actores` (`idActor`, `nombre`, `apellido`, `fechaNac`, `cantidadDePeliculas`) VALUES (DEFAULT, 'Natalie', 'Portman', '1987-04-03', 20);

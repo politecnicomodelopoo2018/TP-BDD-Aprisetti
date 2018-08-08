@@ -14,27 +14,27 @@ class Pelicula(object):
     idProductor = None
     idCategoria = None
 
-    __db = Database()
 
-    def cargar(self, id):
+    @staticmethod
+    def cargar(id):
 
-        info = self.__db.run("Select * FROM Peliculas")
-
+        info = Database().run("Select * FROM Peliculas where idPelicula = '%s'" %(id))
+        pepe = Pelicula()
         for item in info:
 
             if id == item["idPelicula"]:
 
-                self.idPelicula = item["idPelicula"]
-                self.titulo = item["titulo"]
-                self.duracion = item["duracion"]
-                self.fechaLanzamiento = item["fechaLanzamiento"]
-                self.presupuesto = item["presupuesto"]
-                self.ganancia = item["ganancia"]
-                self.sinopsis = item["sinopsis"]
-                self.idAutor = item["idAutor"]
-                self.idProductor = item["idProductor"]
-                self.idCategoria = item["idCategoria"]
-
+                pepe.idPelicula = item["idPelicula"]
+                pepe.titulo = item["titulo"]
+                pepe.duracion = item["duracion"]
+                pepe.fechaLanzamiento = item["fechaLanzamiento"]
+                pepe.presupuesto = item["presupuesto"]
+                pepe.ganancia = item["ganancia"]
+                pepe.sinopsis = item["sinopsis"]
+                pepe.idAutor = item["idAutor"]
+                pepe.idProductor = item["idProductor"]
+                pepe.idCategoria = item["idCategoria"]
+        return pepe
     def alta(self):
 
         self.__db.run("INSERT INTO Peliculas Values (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
@@ -43,16 +43,8 @@ class Pelicula(object):
 
     def baja(self):
 
-        idRev = self.__db.run("Select idReview From Reviews where idPelicula = '%s'" %(self.idPelicula))
-
-        reviewAux = Reviews()
-
-        for item in idRev:
-
-            print(item["idReview"])
-            reviewAux.cargar(item["idReview"])
-            reviewAux.baja()
-
+        self.__db.run("DELETE From Reviews where idPelicula = '%s'" %(self.idPelicula))
+        self.__db.run("DELETE From Peliculas_has_Actores where idPelicula = '%s'" % (self.idPelicula))
         self.__db.run("DELETE FROM Peliculas WHERE idPelicula = '%s'" % (self.idPelicula))
 
     def modificacion(self):
