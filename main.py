@@ -10,7 +10,7 @@ data.setConnection("127.0.0.1", "root", "alumno", "TPPYTHON")
 c = Categoria()
 p = Pelicula()
 a1 = Actores()
-a2 = Autores()
+au2 = Autores()
 a3 = Productores()
 
 '''''''''
@@ -63,7 +63,11 @@ p.idCategoria = 3
 p.alta()
 
 
-'''''
+
 pee = Pelicula()
 jose = pee.cargar(2)
 print(jose.duracion)
+'''''
+
+autor= au2.cargar(3)
+print(autor.nombre)

@@ -10,11 +10,6 @@ class Persona(object):
 
         self.__db = Database()
 
-    def cargar(self, id):
-
-        info = self.__db.run("Select * FROM %s" %(self.__class__.__name__))
-
-        return info
 
 class Autores (Persona):
 
@@ -25,18 +20,20 @@ class Autores (Persona):
         self.idAutor = idAutor
         self.ratingPromedio = ratingPromedio
 
-    def cargar(self, id):
+    @staticmethod
+    def cargar(id):
 
-        info = self.__db.run("Select * FROM Autores")
-
+        info = Database().run("Select * FROM Autores where idAutor = '%s'" %(id))
+        pepe = Autores()
         for item in info:
             if id == item["idAutor"]:
-                self.idAutor = item["idAutor"]
-                self.nombre = item["nombre"]
-                self.apellido = item["apellido"]
-                self.fechaNac = item["fechaNac"]
-                self.ratingPromedio = item["ratingPromedio"]
+                pepe.idAutor = item["idAutor"]
+                pepe.nombre = item["nombre"]
+                pepe.apellido = item["apellido"]
+                pepe.fechaNac = item["fechaNac"]
+                pepe.ratingPromedio = item["ratingPromedio"]
 
+        return pepe
     def alta(self):
 
         self.__db.run("INSERT INTO Autores Values (NULL, '%s', '%s', '%s', '%s')" % (self.nombre, self.apellido,
