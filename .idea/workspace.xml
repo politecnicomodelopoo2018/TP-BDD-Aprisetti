@@ -4,15 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/main.py" line="11" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d90cfe4d-8362-47a5-8d53-c68f7357f1c0" name="Default" comment="BDD">
-      <change beforePath="" afterPath="$PROJECT_DIR$/menu.py" />
+    <list default="true" id="d90cfe4d-8362-47a5-8d53-c68f7357f1c0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Class_Categoria.py" afterPath="$PROJECT_DIR$/Class_Categoria.py" />
-      <change beforePath="$PROJECT_DIR$/Class_Pelicula.py" afterPath="$PROJECT_DIR$/Class_Pelicula.py" />
-      <change beforePath="$PROJECT_DIR$/Class_Peliculas_has_Actores.py" afterPath="$PROJECT_DIR$/Class_Peliculas_has_Actores.py" />
-      <change beforePath="$PROJECT_DIR$/Class_Personas.py" afterPath="$PROJECT_DIR$/Class_Personas.py" />
-      <change beforePath="$PROJECT_DIR$/Class_Reviews.py" afterPath="$PROJECT_DIR$/Class_Reviews.py" />
-      <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/menu.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1470">
-              <caret line="98" column="13" lean-forward="true" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -351,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533760526099</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="BDD">
+      <created>1533910454527</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1533910454527</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -768,7 +768,7 @@
     <entry file="file://$PROJECT_DIR$/menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1470">
-          <caret line="98" column="13" lean-forward="true" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+          <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
