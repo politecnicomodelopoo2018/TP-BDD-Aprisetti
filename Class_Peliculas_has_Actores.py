@@ -1,3 +1,5 @@
+from Database import *
+
 class Peliculas_has_Actores(object):
 
     idPelicula = None
@@ -5,7 +7,7 @@ class Peliculas_has_Actores(object):
 
     def cargar(self):
 
-        info = self.__db.run("Select * FROM Peliculas_has_Actores")
+        info = Database().run("Select * FROM Peliculas_has_Actores")
 
         for item in info:
 
@@ -14,9 +16,9 @@ class Peliculas_has_Actores(object):
 
     def alta(self):
 
-        self.__db.run("INSERT INTO Peliculas_has_Actores Values (%s, %s)" % (self.idPelicula, self.idActor))
+        self.Database().run("INSERT INTO Peliculas_has_Actores Values (%s, %s)" % (self.idPelicula, self.idActor))
 
     def baja(self):
 
-        self.__db.run("DELETE FROM Peliculas_has_Actores WHERE idPeliculas = %s AND idActor = %s" % (self.idPelicula,
-                                                                                                     self.idActor))
+        self.Database().run("DELETE FROM Peliculas_has_Actores WHERE idPeliculas = %s AND idActor = %s"
+                            % (self.idPelicula, self.idActor))

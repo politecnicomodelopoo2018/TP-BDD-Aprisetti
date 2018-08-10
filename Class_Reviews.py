@@ -6,30 +6,32 @@ class Reviews(object):
     critico = None
     descripcion = None
     puntaje = None
-    __db = Database()
+    idPelicula = None
+    Database()
 
-    def cargar(self, id):
+    @staticmethod
+    def cargar(id):
 
-        info = self.__db.run("Select * FROM Reviews")
-
+        info = Database().run("Select * FROM Reviews")
+        review = Reviews()
         for item in info:
             if item["idReview"] == id:
-
-                self.idReview = item["idReview"]
-                self.critico = item["critico"]
-                self.descripcion = item["descripcion"]
-                self.puntaje = item["puntaje"]
-
+                review.idReview = item["idReview"]
+                review.critico = item["critico"]
+                review.descripcion = item["descripcion"]
+                review.puntaje = item["puntaje"]
+                review.idPelicula = item["idPelicula"]
+        return review
     def alta(self):
 
-        self.__db.run("INSERT INTO Reviews Values (NULL, '%s', '%s', '%s')" %(self.critico, self.puntaje, self.puntaje))
+        Database().run("INSERT INTO Reviews Values (NULL, '%s', '%s', '%s', '%s')" %(self.critico, self.descripcion,
+                                                                                      self.puntaje, self.idPelicula))
 
     def baja(self):
 
-        self.__db.run("DELETE FROM Reviews Where idReview = '%s'" % self.idReview)
+        Database().run("DELETE FROM Reviews Where idReview = '%s'" % self.idReview)
 
     def modificacion(self):
 
-        self.__db.run("UPDATE Reviews Set critico = '%s', descripcion = '%s', puntaje = '%s'" % (self.critico,
-                                                                                           self.descripcion,
-                                                                                           self.puntaje))
+        Database().run("UPDATE Reviews Set critico = '%s', descripcion = '%s', puntaje = '%s' WHERE idReview = %s"
+                       % (self.critico, self.descripcion, self.puntaje, self.idReview))

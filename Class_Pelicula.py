@@ -1,4 +1,5 @@
 from Database import *
+from datetime import datetime
 from Class_Reviews import Reviews
 
 class Pelicula(object):
@@ -14,42 +15,50 @@ class Pelicula(object):
     idProductor = None
     idCategoria = None
 
-
     @staticmethod
     def cargar(id):
 
         info = Database().run("Select * FROM Peliculas where idPelicula = '%s'" %(id))
-        pepe = Pelicula()
+
+        pelicula = Pelicula()
+
         for item in info:
 
             if id == item["idPelicula"]:
 
-                pepe.idPelicula = item["idPelicula"]
-                pepe.titulo = item["titulo"]
-                pepe.duracion = item["duracion"]
-                pepe.fechaLanzamiento = item["fechaLanzamiento"]
-                pepe.presupuesto = item["presupuesto"]
-                pepe.ganancia = item["ganancia"]
-                pepe.sinopsis = item["sinopsis"]
-                pepe.idAutor = item["idAutor"]
-                pepe.idProductor = item["idProductor"]
-                pepe.idCategoria = item["idCategoria"]
-        return pepe
+                pelicula.idPelicula = item["idPelicula"]
+                pelicula.titulo = item["titulo"]
+                pelicula.duracion = item["duracion"]
+                pelicula.fechaLanzamiento = item["fechaLanzamiento"]
+                pelicula.presupuesto = item["presupuesto"]
+                pelicula.ganancia = item["ganancia"]
+                pelicula.sinopsis = item["sinopsis"]
+                pelicula.idAutor = item["idAutor"]
+                pelicula.idProductor = item["idProductor"]
+                pelicula.idCategoria = item["idCategoria"]
+
+        return pelicula
+
     def alta(self):
 
-        self.__db.run("INSERT INTO Peliculas Values (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+        Database().run("INSERT INTO Peliculas Values (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
                       % (self.titulo, self.duracion, self.fechaLanzamiento, self.presupuesto, self.ganancia,
                          self.sinopsis, self.idAutor, self.idProductor, self.idCategoria))
 
     def baja(self):
 
-        self.__db.run("DELETE From Reviews where idPelicula = '%s'" %(self.idPelicula))
-        self.__db.run("DELETE From Peliculas_has_Actores where idPelicula = '%s'" % (self.idPelicula))
-        self.__db.run("DELETE FROM Peliculas WHERE idPelicula = '%s'" % (self.idPelicula))
+        infoAuxRev = Database().run("Select idReview FROM Reviews WHERE idPelicula = %s" % self.idPelicula)
+        for item in infoAuxRev:
+            revAux = Reviews.cargar(item["idReview"])
+            revAux.baja()
+
+        Database().run("DELETE From Peliculas_has_Actores where idPelicula = '%s'" % (self.idPelicula))
+
+        Database().run("DELETE FROM Peliculas WHERE idPelicula = '%s'" % (self.idPelicula))
 
     def modificacion(self):
 
-        self.__db.run(("UPDATE Peliculas SET titulo = '%s', duracion = '%s', fechaLanzamiento = '%s',"
+        Database().run(("UPDATE Peliculas SET titulo = '%s', duracion = '%s', fechaLanzamiento = '%s',"
                        "presupuesto = '%s', ganancia = '%s', sinopsis = '%s',"
                        "idAutor = '%s', idProductor = '%s', idCategoria = '%s'"
                        "WHERE idPelicula = %s" % (self.titulo, self.duracion, self.fechaLanzamiento,

@@ -1,34 +1,42 @@
 from Database import *
+from Class_Pelicula import Pelicula
 
 class Categoria(object):
 
     idCategoria = None
     nombre = None
-    __db = Database()
 
+    @staticmethod
+    def cargar(id):
 
-    def cargar(self, id):
+        info = Database().run("Select * FROM Categorias")
 
-        info = self.__db.run("Select * FROM Categorias")
-
+        categoria = Categoria()
 
         for item in info:
             if id == item["idCategoria"]:
-                self.__idCategoria = item["idCategoria"]
-                self.nombre = item["nombre"]
+                categoria.idCategoria = item["idCategoria"]
+                categoria.nombre = item["nombre"]
+
+        return categoria
 
 
     def alta(self):
 
-        self.__db.run("INSERT INTO Categorias Values (NULL, '%s')" %self.nombre)
+        Database().run("INSERT INTO Categorias Values (NULL, '%s')" %self.nombre)
 
     def baja(self):
+        print(self.idCategoria)
+        infoAux = Database().run("Select idPelicula FROM Peliculas WHERE idCategoria = %s" % self.idCategoria)
 
-        self.__db.run("DELETE FROM Categorias WHERE idCategoria = '%s'" %(self.idCategoria))
+        for item in infoAux:
+            pelicula = Pelicula.cargar(item["idPelicula"])
+            pelicula.baja()
+
+        Database().run("DELETE FROM Categorias WHERE idCategoria = '%s'" %(self.idCategoria))
 
 
-    def modificacion(self, newNombre):
+    def modificacion(self):
 
-        self.__db.run(("UPDATE Categorias SET nombre = '%s' WHERE idCategoria = '%s'" %(newNombre, self.idCategoria)))
-
-        self.__nombre = newNombre
+        Database().run(("UPDATE Categorias SET nombre = '%s' WHERE idCategoria = '%s'"
+                             %(self.nombre,self.idCategoria)))
