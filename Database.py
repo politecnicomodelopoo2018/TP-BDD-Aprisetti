@@ -22,20 +22,11 @@ class Database(object):
     def run(self, query):
         db = pymysql.connect(host = self.__host,
                              user = self.__user,
-                             passwd = self.__passwd,
+                             #passwd = self.__passwd,
                              db = self.__db,
                              autocommit = True
                             )
 
-
-        '''select_cursor = db.cursor(pymysql.cursors.DictCursor)
-
-        select_cursor.execute("Select * From Peliculas")
-        for item in select_cursor:
-            print("%d / %s / %s / %s / %s / %s / %s / %s / %s / %s"
-                  %(item["idPelicula"], item["titulo"], item["duracion"], item["fechaLanzamiento"],
-                    item["presupuesto"], item["ganancia"], item["sinopsis"], item["idAutor"],
-                    item["idProductor"], item["idCategoria"]))'''
         cursor = db.cursor(pymysql.cursors.DictCursor) #CURSOR:SIRVE PARA EJECUTAR LOS QUERIES, DictCursor:Cursor a Dict
 
         cursor.execute(query)
