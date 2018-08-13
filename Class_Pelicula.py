@@ -2,7 +2,7 @@ from Database import *
 from datetime import datetime
 from Class_Reviews import Reviews
 
-class Pelicula(object):
+class Peliculas(object):
 
     idPelicula = None
     titulo = None
@@ -20,7 +20,7 @@ class Pelicula(object):
 
         info = Database().run("Select * FROM Peliculas where idPelicula = '%s'" %(id))
 
-        pelicula = Pelicula()
+        pelicula = Peliculas()
 
         for item in info:
 

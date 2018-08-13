@@ -1,7 +1,7 @@
 from Database import *
-from Class_Pelicula import Pelicula
+from Class_Pelicula import Peliculas
 
-class Categoria(object):
+class Categorias(object):
 
     idCategoria = None
     nombre = None
@@ -11,7 +11,7 @@ class Categoria(object):
 
         info = Database().run("Select * FROM Categorias")
 
-        categoria = Categoria()
+        categoria = Categorias()
 
         for item in info:
             if id == item["idCategoria"]:
@@ -30,7 +30,7 @@ class Categoria(object):
         infoAux = Database().run("Select idPelicula FROM Peliculas WHERE idCategoria = %s" % self.idCategoria)
 
         for item in infoAux:
-            pelicula = Pelicula.cargar(item["idPelicula"])
+            pelicula = Peliculas.cargar(item["idPelicula"])
             pelicula.baja()
 
         Database().run("DELETE FROM Categorias WHERE idCategoria = '%s'" %(self.idCategoria))

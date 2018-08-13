@@ -42,7 +42,7 @@ class Autores (Persona):
     def baja(self):
         info = Database().run("Select idPelicula FROM Peliculas where idAutor = '%s'" %(self.idAutor))
         for item in info:
-            auxiliar = Pelicula().cargar(item["idPelicula"])
+            auxiliar = Peliculas().cargar(item["idPelicula"])
         auxiliar.baja()
 
         Database().run("DELETE FROM Autores WHERE idAutor = '%s'" % (self.idAutor))

@@ -1,6 +1,6 @@
 from Database import *
-from Class_Categoria import Categoria
-from Class_Pelicula import Pelicula
+from Class_Categoria import Categorias
+from Class_Pelicula import Peliculas
 from Class_Personas import Autores, Actores, Productores
 from Class_Reviews import Reviews
 from flask import Flask, render_template
@@ -15,11 +15,6 @@ app = Flask(__name__)
 
 tablas = nombreTablas()
 
-info = Database().run("Select * FROM Peliculas")
-for item in info:
-    for meti in item.values():
-        print (meti)
-
 @app.route("/")
 def inicio():
 
@@ -27,8 +22,18 @@ def inicio():
 
 @app.route("/<tabla>")
 def tabla(tabla):
-        return render_template("Tabla.html", name = tabla, db = Database().run("Select * FROM %s" % tabla),
-                               row = Database().run("Select * FROM %s" % tabla).fetchall()[0])
+        clase = globals()[tabla]
+        var = clase()
+        varaux = clase()
+        aux = Database().run("Select * FROM %s" % tabla)
+        listaAux = []
+        for item in aux:
+            varaux.cargar(item[nombreID(tabla)])
+            listaAux.append(varaux)
+        longitud = len(listaAux)
 
+        return render_template("Tabla.html", name = tabla, select = Database().run("Select * FROM %s" % tabla),
+                               row = Database().run("Select * FROM %s" % tabla).fetchall()[0],
+                               variable = var, lista = listaAux, lenLista = longitud)
 if __name__ == "__main__":
     app.run(debug=True)

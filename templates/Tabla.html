@@ -6,19 +6,30 @@
     <title>{{name}}</title>
 </head>
 <body>
-    <table border="2" bgcolor="red">
+    <table border="2" bgcolor="green">
       <tr>
         {% for item in row %}
           <th>{{item}}</th>
         {% endfor %}
       </tr>
-      {% for item in db %}
+      {% for cont in range(lenLista) %}
+      {{ cont }}
+      {% for item in select %}
         <tr>
             {% for atributo in item.values() %}
                 <th>{{atributo}}</th>
             {% endfor %}
+            <th><button onclick="delete('{{cont}}')" class = "button"> Borrar </button> </th>
         </tr>
       {% endfor %}
+      {% endfor %}
     </table>
+
+<script>
+    function delete(id){
+
+    }
+</script>
+
 </body>
 </html>
