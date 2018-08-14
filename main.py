@@ -24,16 +24,16 @@ def inicio():
 def tabla(tabla):
         clase = globals()[tabla]
         var = clase()
-        varaux = clase()
+        varauxinicial = clase()
         aux = Database().run("Select * FROM %s" % tabla)
         listaAux = []
         for item in aux:
-            varaux.cargar(item[nombreID(tabla)])
-            listaAux.append(varaux)
+            varauxfinal = varauxinicial.cargar(item[nombreID(tabla)])
+            listaAux.append(varauxfinal)
         longitud = len(listaAux)
 
         return render_template("Tabla.html", name = tabla, select = Database().run("Select * FROM %s" % tabla),
-                               row = Database().run("Select * FROM %s" % tabla).fetchall()[0],
+                               row = Database().run("Select * FROM %s" % tabla).fetchall()[1],
                                variable = var, lista = listaAux, lenLista = longitud)
 if __name__ == "__main__":
     app.run(debug=True)

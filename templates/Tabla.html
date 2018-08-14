@@ -12,24 +12,30 @@
           <th>{{item}}</th>
         {% endfor %}
       </tr>
+      {% for cosa in lista %}
       {% for cont in range(lenLista) %}
-      {{ cont }}
       {% for item in select %}
         <tr>
             {% for atributo in item.values() %}
                 <th>{{atributo}}</th>
             {% endfor %}
-            <th><button onclick="delete('{{cont}}')" class = "button"> Borrar </button> </th>
+            <th><button onclick='delete({{cont}})' class = "button"> Borrar </button> </th>
         </tr>
+      {% endfor %}
       {% endfor %}
       {% endfor %}
     </table>
 
-<script>
-    function delete(id){
-
-    }
-</script>
-
+{% block scripts %}
+    <script>
+        function delete(id){
+             {% for cosa in range(lenLista)%}
+                if (id == {{cosa}}){
+                        {{ lista[cosa].baja() }}
+                    }
+             {% endfor %}
+        }
+    </script>
+{% endblock %}
 </body>
 </html>

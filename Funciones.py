@@ -26,4 +26,6 @@ def nombreID(tabla):
     elif tabla == "Reviews":
         return listaAux[5]
 
+def borrar(id = None, lista = None):
 
+    lista[id].baja
