@@ -4,7 +4,7 @@ from Class_Pelicula import Peliculas
 from Class_Personas import Autores, Actores, Productores
 from Class_Reviews import Reviews
 from flask import request, jsonify, render_template, Flask
-from flask_jsglue import JSGlue
+#from flask_jsglue import JSGlue
 import json
 import datetime
 import sys
@@ -15,7 +15,7 @@ data = Database()
 data.setConnection("127.0.0.1", "root", "alumno", "TPPYTHON")
 
 app = Flask(__name__)
-jsglue = JSGlue(app)
+#jsglue = JSGlue(app) codigo no usado, falta la libreria (Pruscino dame la contraseña)
 
 tablas = nombreTablas()
 
@@ -28,11 +28,14 @@ def inicio():
 
 def tabla(tabla):
 
+        #    {{ JSGlue.include() }} codigo no usado, falta la libreria (Pruscino dame la contraseña)
+
         clase = globals()[tabla]
         var = clase()
         varauxinicial = clase()
         aux = Database().run("Select * FROM %s" % tabla)
         listaAux = []
+
         for item in aux:
             varauxfinal = varauxinicial.cargar(item[nombreID(tabla)])
             listaAux.append(varauxfinal)
@@ -52,7 +55,7 @@ def borrar():
         objetofinal = objetoinicial.cargar(int(request.get_json()['id']))
         objetofinal.baja()
 
-        print(data, file=sys.stderr)
+        print(data, file = sys.stderr)
 
         return jsonify(data)
 
@@ -81,13 +84,3 @@ def ingresar(tabla):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-'''
-function delete(id){
-             {% for cosa in range(lenLista)%}
-                if (id == {{cosa}}){
-                        {{ lista[cosa].baja() }}
-                    }
-             {% endfor %}
-        }
-'''

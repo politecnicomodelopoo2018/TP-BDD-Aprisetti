@@ -5,14 +5,18 @@ class Peliculas_has_Actores(object):
     idPelicula = None
     idActor = None
 
-    def cargar(self):
+    @staticmethod
+    def cargar(idPel, idAut):
 
-        info = Database().run("Select * FROM Peliculas_has_Actores")
+        info = Database().run("Select * FROM Peliculas_has_Actores where idPelicula = '%s' AND idActor = %s"
+                              %(idPel, idAut))
+
+        elim = Peliculas_has_Actores()
 
         for item in info:
 
-            self.idPelicula = item["idPelicula"]
-            self.idActor = item["idActor"]
+            elim.idPelicula = item["idPelicula"]
+            elim.idActor = item["idActor"]
 
     def alta(self):
 

@@ -22,7 +22,7 @@ class Database(object):
     def run(self, query):
         db = pymysql.connect(host = self.__host,
                              user = self.__user,
-                             #passwd = self.__passwd,
+                             passwd = self.__passwd,
                              db = self.__db,
                              autocommit = True
                             )
