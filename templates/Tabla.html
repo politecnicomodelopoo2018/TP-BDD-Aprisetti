@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='Diseño.css') }}">
+    <link rel="shortcut icon" href="https://s3.amazonaws.com/django-blog/ico/favicon_v2.ico">
+    {{ JSGlue.include() }}
     <title>{{name}}</title>
 </head>
 <body>
@@ -19,23 +23,39 @@
             {% for atributo in item.values() %}
                 <th>{{atributo}}</th>
             {% endfor %}
-            <th><button onclick='delete({{cont}})' class = "button"> Borrar </button> </th>
+            <th><button onclick='borrar({{cont}}+1)' class = "button"> Borrar </button> </th>
         </tr>
       {% endfor %}
       {% endfor %}
       {% endfor %}
     </table>
 
-{% block scripts %}
-    <script>
-        function delete(id){
-             {% for cosa in range(lenLista)%}
-                if (id == {{cosa}}){
-                        {{ lista[cosa].baja() }}
-                    }
-             {% endfor %}
+<script>
+    var global = new Object();
+
+    function borrar(id){
+        console.log(id)
+        global.id = id;
+        global.tabla = '{{name}}';
+        console.log(global.id)
+        $.ajax({
+            url: "/borrar",
+            traditional: "true",
+            contentType: "application/json;charset=utf-8",
+            type: 'POST',
+            data: JSON.stringify(global),
+            dataType: "json"
+        })
+        .done(function(result){
+        console.log(result)
+        })
         }
-    </script>
-{% endblock %}
+
+
+
+
+
+</script>
+
 </body>
 </html>

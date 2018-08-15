@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Diseño.css') }}">
+    <title>Ingresar {{name}}</title>
 </head>
 <body>
+
+    <table border="2" bgcolor="green">
+      <tr>
+        {% for item in row %}
+          <th>{{item}}</th>
+        {% endfor %}
+      </tr>
+      <tr>
+        {% for item in row %}
+          <th> <input type="text"> <br> </th>
+        {% endfor %}
+      </tr>
+    </table>
 
 </body>
 </html>
