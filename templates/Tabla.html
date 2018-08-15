@@ -4,6 +4,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="1">
     <link rel="stylesheet" href="{{ url_for('static', filename='Diseño.css') }}">
     <link rel="shortcut icon" href="https://s3.amazonaws.com/django-blog/ico/favicon_v2.ico">
     <title>{{name}}</title>
@@ -15,17 +16,13 @@
           <th>{{item}}</th>
         {% endfor %}
       </tr>
-      {% for cosa in lista %}
-      {% for cont in range(lenLista) %}
       {% for item in select %}
         <tr>
             {% for atributo in item.values() %}
                 <th>{{atributo}}</th>
             {% endfor %}
-            <th><button onclick='borrar({{cont}}+1)' class = "button"> Borrar </button> </th>
+            <th><button onclick='borrar({{item[nombreID(name)]}})' class = "button"> Borrar </button> </th>
         </tr>
-      {% endfor %}
-      {% endfor %}
       {% endfor %}
     </table>
 
@@ -45,9 +42,6 @@
             type: 'POST',
             data: JSON.stringify(global),
             dataType: "json"
-        })
-        .done(function(result){
-        console.log(result)
         })
         }
 

@@ -30,34 +30,18 @@ def tabla(tabla):
 
         #    {{ JSGlue.include() }} codigo no usado, falta la libreria (Pruscino dame la contraseña)
 
-        clase = globals()[tabla]
-        var = clase()
-        varauxinicial = clase()
-        aux = Database().run("Select * FROM %s" % tabla)
-        listaAux = []
-
-        for item in aux:
-            varauxfinal = varauxinicial.cargar(item[nombreID(tabla)])
-            listaAux.append(varauxfinal)
-
-        longitud = len(listaAux)
-
         return render_template("Tabla.html", name = tabla, select = Database().run("Select * FROM %s" % tabla),
-                               row = Database().run("Select * FROM %s" % tabla).fetchall()[1],
-                               variable = var, lista = listaAux, lenLista = longitud)
+                               row = Database().run("Select * FROM %s" % tabla).fetchall()[1], nombreID = nombreID)
 
 @app.route("/borrar", methods = ["GET", "POST"])
 def borrar():
     if request.method == "POST":
-
         clase = globals()[request.get_json()['tabla']]
         objetoinicial = clase()
         objetofinal = objetoinicial.cargar(int(request.get_json()['id']))
         objetofinal.baja()
 
-        print(data, file = sys.stderr)
-
-        return jsonify(data)
+        return render_template("Tabla.html")
 
     else:
 
@@ -77,6 +61,8 @@ def ingresar(tabla):
         varauxfinal = varauxinicial.cargar(item[nombreID(tabla)])
         listaAux.append(varauxfinal)
     longitud = len(listaAux)
+
+
 
     return render_template("ingresar.html", name=tabla, select=Database().run("Select * FROM %s" % tabla),
                            row=Database().run("Select * FROM %s" % tabla).fetchall()[1],
